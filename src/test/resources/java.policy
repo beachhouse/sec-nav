@@ -1,0 +1,49 @@
+// for Intellij
+keystore "store.jks","JKS";
+grant codeBase "file:${idea.launcher.bin.path}/../-" {
+    permission java.security.AllPermission;
+};
+
+// for Maven
+grant codeBase "file:${maven.repo.local}/-" {
+    permission java.security.AllPermission;
+};
+
+grant codeBase "file:target/classes/-" {
+    permission java.security.AllPermission;
+};
+
+grant codeBase "file:target/test-classes/-" {
+    permission java.security.AllPermission;
+};
+
+grant codeBase "file:target/surefire/-" {
+    permission java.security.AllPermission;
+};
+
+//now fake URLs to test against with and without extra data
+
+//grant codeBase "file:target/jars/can/-" {
+//    permission java.util.PropertyPermission "user.name", "read";
+//};
+
+grant signedBy "store", codeBase "file:target/jars/can/signed/-" {
+    permission java.util.PropertyPermission "user.name", "read";
+};
+
+grant codeBase "file:target/jars/can/notsigned/-" {
+    permission java.util.PropertyPermission "user.name", "read";
+};
+
+grant codeBase "file:target/jars/cannot/-" {
+    permission java.util.PropertyPermission "user.name2", "read";
+};
+
+
+grant signedBy "store", codeBase "file:target/jars/cannot/signed/-" {
+    permission java.util.PropertyPermission "user.name2", "read";
+};
+
+grant codeBase "file:target/jars/cannot/notsigned/-" {
+    permission java.util.PropertyPermission "user.name2", "read";
+};
